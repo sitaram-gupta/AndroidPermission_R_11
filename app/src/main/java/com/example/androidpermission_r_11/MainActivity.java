@@ -2,6 +2,7 @@ package com.example.androidpermission_r_11;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,12 +10,20 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -78,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
                 }
             }
+        } else if (resultCode == RESULT_OK) {
+            if (requestCode == 200) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                String filePath = result.getUriFilePath(MainActivity.this, true);
+                File fileDisplayPicture = new File(filePath);
+                ImageView imageView = findViewById(R.id.iv_image);
+                imageView.setImageURI(Uri.fromFile(fileDisplayPicture));
+            }
         }
     }
 
@@ -99,5 +116,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void pickImage(View view) {
+        Intent intentLicenseBack = CropImage.activity(null)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .getIntent(this);
+        startActivityForResult(intentLicenseBack, 200);
     }
 }
