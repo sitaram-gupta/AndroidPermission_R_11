@@ -2,7 +2,6 @@ package com.example.androidpermission_r_11;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,8 +21,6 @@ import com.canhub.cropper.CropImage;
 import com.canhub.cropper.CropImageView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
