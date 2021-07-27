@@ -15,6 +15,14 @@
         android:onClick="pickImage"
         android:text="Pick Image" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:onClick="pickImageFromCamera"
+        android:text="Pick Image From Camera" />
+
     <ImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"

@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 File fileDisplayPicture = new File(filePath);
                 ImageView imageView = findViewById(R.id.iv_image);
                 imageView.setImageURI(Uri.fromFile(fileDisplayPicture));
+            } else if (requestCode == 525) {
+                ImageView imageView = findViewById(R.id.iv_image);
+                imageView.setImageBitmap(data.getParcelableExtra("BitmapImage"));
             }
         }
     }
@@ -42,5 +45,10 @@ public class MainActivity extends AppCompatActivity {
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .getIntent(this);
         startActivityForResult(intentLicenseBack, 200);
+    }
+
+    public void pickImageFromCamera(View view) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivityForResult(intent, 525);
     }
 }
